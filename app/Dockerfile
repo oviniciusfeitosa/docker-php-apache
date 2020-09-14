@@ -36,13 +36,13 @@ WORKDIR /var/www/
 EXPOSE 80
 EXPOSE 9000
 
-COPY . /var/www/app
+#COPY . /var/www/app
+RUN mkdir -p /var/www/app
 
 RUN chmod +x -R /var/www/app
-RUN usermod -u 1000 www-data
 
-COPY ./docker/apache2/sites-available/site.conf /etc/apache2/sites-available/site.conf
 COPY ./docker/apache2/conf-available/security.conf /etc/apache2/conf-available/security.conf
+COPY ./docker/apache2/sites-available/site.conf /etc/apache2/sites-available/site.conf
 
 RUN a2ensite site.conf
 RUN a2dissite 000-default.conf
